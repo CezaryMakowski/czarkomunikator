@@ -1,0 +1,9 @@
+.userList {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  overflow-y: auto;
+  gap: 12px;
+}

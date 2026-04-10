@@ -1,0 +1,64 @@
+.userTile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.userTile:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.picWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.userImage {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 0.1rem;
+  right: 0.1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgb(228, 66, 66);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.activeIndicator.active {
+  background: #22c55e;
+}
+
+.nameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  overflow: hidden;
+}
+
+.nameWrapper p:first-child {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+}
+
+.nameWrapper p {
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.5;
+}

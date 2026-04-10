@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+}
+
+.welcome {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 720px) {
+  .signOutButton {
+    width: 100%;
+  }
+}

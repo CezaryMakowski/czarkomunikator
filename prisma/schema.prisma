@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String    @unique
+  email          String    @unique
+  hashedPassword String
+  emailVerified  DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
+  lastSeenAt     DateTime  @default(now())
+  image          String?
+
+  // Relacje komunikatora
+  conversations Conversation[] @relation("UserConversations")
+  messages      Message[]
+
+  // Standardowe pola dla NextAuth
+  accounts Account[]
+}
+
+// --- MODELE KOMUNIKATORA ---
+
+model Conversation {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  lastMessageAt DateTime @default(now()) // Do sortowania listy czatów
+
+  // Relacja Many-to-Many: Użytkownicy w tej rozmowie
+  users User[] @relation("UserConversations")
+
+  // Relacja One-to-Many: Wiadomości w tej rozmowie
+  messages Message[]
+}
+
+model Message {
+  id           String   @id @default(cuid())
+  body         String? // Treść tekstowa
+  image        String? // Opcjonalne zdjęcie w wiadomości
+  createdAt    DateTime @default(now())
+  clientSideId String? // Dla synchronizacji Optimistic Updates
+
+  // Relacja do rozmowy
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  // Relacja do nadawcy
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  // Status przeczytania (opcjonalnie, ale super w portfolio)
+  seen Boolean @default(false)
+}
+
+// --- MODELE POMOCNICZE NEXTAUTH (Standard) ---
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
