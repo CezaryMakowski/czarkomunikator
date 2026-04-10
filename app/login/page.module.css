@@ -1,7 +1,8 @@
 .main {
-  min-height: 100dvh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   padding: 1.5rem;
 }
 

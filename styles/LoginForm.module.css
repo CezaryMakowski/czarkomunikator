@@ -25,14 +25,14 @@
 .error {
   margin: 0;
   color: var(--error-color);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .registerText {
   margin: 0.5rem 0 0;
   text-align: center;
   color: var(--text-color);
-  font-size: 0.92rem;
+  font-size: 1rem;
 }
 
 .registerLink {
