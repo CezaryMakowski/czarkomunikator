@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 85rem;
-  height: 100vh;
+  height: 100dvh;
   margin: auto;
   justify-content: center;
   align-items: flex-start;
