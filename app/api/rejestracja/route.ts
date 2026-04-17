@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   if (!user)
     return NextResponse.json(
       { success: false },
-      { status: 500, statusText: "something went wrong during user creation" },
+      { status: 500, statusText: "Nie można utworzyć użytkownika" },
     );
 
   return NextResponse.json(user);

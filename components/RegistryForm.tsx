@@ -19,9 +19,8 @@ export default function RegistryForm() {
 
   async function onSubmit(data: RegistryFormInput) {
     setIsUnknownError(false);
-    let URL = process.env.NEXT_PUBLIC_NEXTAUTH_URL as string;
     try {
-      const res = await fetch(`${URL}/api/rejestracja`, {
+      const res = await fetch(`/api/rejestracja`, {
         method: "POST",
         body: JSON.stringify(data),
       });

@@ -42,3 +42,38 @@ export async function POST(req: NextRequest) {
   }
   return NextResponse.json({ message: "User status updated" });
 }
+
+export async function DELETE(req: NextRequest) {
+  const { userId } = await req.json();
+  const result = await prisma.conversation.deleteMany({
+    where: {
+      users: {
+        some: {
+          id: userId,
+        },
+      },
+    },
+  });
+
+  if (!result) {
+    console.error("Failed to delete conversations for userId:", userId);
+    return NextResponse.json(
+      { error: "Failed to delete conversations" },
+      { status: 500 },
+    );
+  }
+
+  const user = await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    console.error("Failed to delete user with userId:", userId);
+    return NextResponse.json(
+      { error: "Failed to delete user" },
+      { status: 500 },
+    );
+  }
+
+  return NextResponse.json({ message: "Account deleted successfully" });
+}
